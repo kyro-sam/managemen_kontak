@@ -1,76 +1,35 @@
 """Program Manajemen Kontak"""
 
-def membuka_kontak(path='D:/Data_Pribadi/Belajar_Python_2025/managemen_kontak/kotak.txt'):
-    with open(path, mode='r') as file:
-        kontak= file.readlines()
-    return kontak
+import kontak
 
-def meyimpan_kontak(path='D:/Data_Pribadi/Belajar_Python_2025/managemen_kontak/kotak.txt', isi=[]):
-    with open(path, mode='w') as file:
-        file.writelines(isi)
+def main():
+    kontak_kantor = kontak.Kontak()
+    kontak_keluarga = kontak.Kontak()
 
-class Kontak:
-    def __init__(self):
-        self.kontak = membuka_kontak()
+    while True:
+        print("\nMenu Kotak")
+        print("1. Melihat Semua Kontak")
+        print("2. Menambahkan Kontak Baru")
+        print("3. Menghapus Kontak")
+        print("4. Keluar dari Kontak")
 
+        pilihan = input("Masukan pilihan menu kontak (1,2,3, atau 4): ")
 
-    def melihat_kotak(self):
-        # melihat semua kontak
-        if self.kontak:
-            for num, item in enumerate(self.kontak, start=1):
-                print(f"{num}. " + item)
+        if pilihan == '1':
+            kontak_keluarga.melihat_kotak()
+
+        elif pilihan == '2':
+            kontak_keluarga.menambah_kotak()
+
+        elif pilihan == '3':
+            kontak_keluarga.menghapus_kontak()
+
+        elif pilihan == '4':
+            # keluar dari kontak
+            kontak_keluarga.keluar_kontak()
+            break
         else:
-            print("Kontak Kosong")
-            return 1
+            print("Anda memasukkan pilihan yang salah")
 
-    def menambah_kotak(self):
-        # menambahkan kontak
-        nama = input("Masukkan nama kontak yang baru: ")
-        HP = input("Masukan nomor kontak yang baru: ")
-        email = input("Masukkan email kontak yang baru: ")
-        kontak_baru = (f'{nama} {HP}, {email}' + '\n')
-        self.kontak.append(kontak_baru)
-        print(f"Kontak {nama} baru berhasil ditambahkan")
-
-    def menghapus_kontak(self):
-        # menghapus kontak
-        if self.melihat_kotak() == 1:
-           return
-        else:
-            try:
-                index_hapus = int(input("Masukan nomor kontak yang akan dihapus: "))
-                print(f"Kontak {index_hapus} berhasil dihapus")
-                del self.kontak[index_hapus - 1]
-            except:
-                print("Inputa yang anda masukan salah ")
-
-    def keluar_kontak(self):
-        meyimpan_kontak(isi=self.kontak)
-
-kontak_kantor = Kontak()
-kontak_keluarga = Kontak()
-
-while True:
-    print("\nMenu Kotak")
-    print("1. Melihat Semua Kontak")
-    print("2. Menambahkan Kontak Baru")
-    print("3. Menghapus Kontak")
-    print("4. Keluar dari Kontak")
-
-    pilihan = input("Masukan pilihan menu kontak (1,2,3, atau 4): ")
-
-    if pilihan == '1':
-        kontak_keluarga.melihat_kotak()
-
-    elif pilihan == '2':
-        kontak_keluarga.menambah_kotak()
-
-    elif pilihan == '3':
-        kontak_keluarga.menghapus_kontak()
-
-    elif pilihan == '4':
-        # keluar dari kontak
-        kontak_keluarga.keluar_kontak()
-        break
-    else:
-        print("Anda memasukkan pilihan yang salah")
+if __name__ == "__main__":
+    main()
